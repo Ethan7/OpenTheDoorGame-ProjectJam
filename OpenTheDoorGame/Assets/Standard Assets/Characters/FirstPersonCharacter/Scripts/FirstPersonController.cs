@@ -41,7 +41,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-  
+		public int m_lookspeed;
+
         // Use this for initialization
         private void Start()
         {
@@ -62,6 +63,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             RotateView();
+			if (Input.GetMouseButton (1)) // for alternate rotating
+			{
+				RotateViewButtonDown();
+			} else RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -234,11 +239,38 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            //if(Input.mousePosition.x > 0 && Input.mousePosition.x < Screen.width && Input.mousePosition.y > 0 && Input.mousePosition.y < Screen.height)
-            {
-                m_MouseLook.LookRotation(transform, m_Camera.transform);
-            }
+//			m_MouseLook.LookRotation(transform, m_Camera.transform);
+//			if(Input.mousePosition.x > 0 && Input.mousePosition.x < Screen.width && Input.mousePosition.y > 0 && Input.mousePosition.y < Screen.height)
+//			{
+//				m_MouseLook.LookRotation(transform, m_Camera.transform);
+//			}
+			if (Input.mousePosition.x < 50) 
+			{
+				m_MouseLook.newLookRotationNX(transform, m_Camera.transform);
+//				Debug.Log ("use the power of X");
+			}
+			if (Input.mousePosition.x > Screen.width - 50) 
+			{
+				m_MouseLook.newLookRotationX(transform, m_Camera.transform);
+//				Debug.Log ("use the power of X");
+			}
+			if (Input.mousePosition.y < 50) 
+			{
+				m_MouseLook.newLookRotationNY(transform, m_Camera.transform);
+//				Debug.Log ("use the power of Y");
+			}
+			if (Input.mousePosition.y > Screen.height - 50) 
+			{
+				m_MouseLook.newLookRotationY(transform, m_Camera.transform);
+				//				Debug.Log ("use the power of Y");
+			}
+
         }
+
+		private void RotateViewButtonDown()
+		{
+			m_MouseLook.LookRotation(transform, m_Camera.transform);
+		}
 
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
