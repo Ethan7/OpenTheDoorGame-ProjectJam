@@ -37,6 +37,8 @@ public class PlayerControls : MonoBehaviour {
                 {
                     Rigidbody rbReactor = hit.collider.gameObject.GetComponent<Rigidbody>();
                     rbReactor.useGravity = true;
+                    Destroy(collidingObject);
+                    holding = false;
                 }
             }
         }
