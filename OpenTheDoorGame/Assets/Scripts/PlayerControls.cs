@@ -51,24 +51,33 @@ public class PlayerControls : MonoBehaviour {
                     //if the object has the 'key' tag, the player will hold it.
                     holding = true;
                 }
-                if(collidingObject.tag == "appearable")
-                {
-                    Object[] objects = FindObjectsOfType(collidingObject.GetType());
-                    for(int i=0; i<objects.Length; i++)
-                    {
-                        GameObject temp = (GameObject)objects[i];
-                        if(temp.tag == "appearable")
-                        {
-                            temp.transform.position = collidingObject.transform.position;
-                            //Object being moved can't have a collider.
-                            //Duplicate object, change tag to "Untagged", turn on Collider, turn off Mesh Renderer
-                        }
-                    }
-                    Destroy(collidingObject);
-                }
+                moveObject(collidingObject, "appearable");
             }
         }
         
 	}
+    /// <summary>
+    /// destroys the given object and moves the corresponding object to the former's position.
+    /// </summary>
+    private void moveObject(GameObject initialObj, string sharedTag)
+    {
+        if (initialObj.tag == "appearable")
+        {
+            Object[] objects = FindObjectsOfType(initialObj.GetType());
+            for (int i = 0; i < objects.Length; i++)
+            {
+                GameObject temp = (GameObject)objects[i];
+                if (temp.tag == "appearable")
+                {
+                    temp.transform.position = initialObj.transform.position;
+                    //Object being moved can't have a collider.
+                    //Duplicate object, change tag to "Untagged", turn on Collider, turn off Mesh Renderer
+                }
+            }
+            Destroy(initialObj);
+        }
+    }
+
+
 
 }
