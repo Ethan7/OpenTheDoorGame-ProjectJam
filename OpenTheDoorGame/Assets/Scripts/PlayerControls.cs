@@ -43,7 +43,7 @@ public class PlayerControls : MonoBehaviour {
             }
         }
         cameraRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(cameraRay, out hit, 2f))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0)), out hit, 2f))
         {//Checking if the camera is facing a collider
             if (holding == false && Input.GetMouseButtonDown(0))
             {//Checks if mouse is being clicked, the player isn't already holding anything
