@@ -1,0 +1,8 @@
+Library
+Temp
+obj
+*.userprefs
+/*.csproj
+*.suo
+/*.sln
+Thumbs.db
