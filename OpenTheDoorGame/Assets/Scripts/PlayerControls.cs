@@ -26,7 +26,7 @@ public class PlayerControls : MonoBehaviour {
             collidingObject.transform.position = Camera.main.transform.forward + Camera.main.transform.position;
             collidingObject.transform.rotation = Camera.main.transform.rotation;
             objRay = new Ray(collidingObject.transform.position, collidingObject.transform.forward);
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 //releases the object with right click 
                 holding = false;
@@ -35,8 +35,8 @@ public class PlayerControls : MonoBehaviour {
             {//Checking if the ray from the held object hits a collider
                 if(hit.collider.gameObject.tag == reactingTag)
                 {
-                    Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-                    rb.useGravity = true;
+                    Rigidbody rbReactor = hit.collider.gameObject.GetComponent<Rigidbody>();
+                    rbReactor.useGravity = true;
                 }
             }
         }
