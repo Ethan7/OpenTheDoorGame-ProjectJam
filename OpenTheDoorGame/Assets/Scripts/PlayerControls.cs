@@ -57,9 +57,11 @@ public class PlayerControls : MonoBehaviour {
                     for(int i=0; i<objects.Length; i++)
                     {
                         GameObject temp = (GameObject)objects[i];
-                        if(temp.tag == collidingObject.tag)
+                        if(temp.tag == "appearable")
                         {
                             temp.transform.position = collidingObject.transform.position;
+                            //Object being moved can't have a collider.
+                            //Duplicate object, change tag to "Untagged", turn on Collider, turn off Mesh Renderer
                         }
                     }
                     Destroy(collidingObject);
